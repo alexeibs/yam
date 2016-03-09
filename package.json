@@ -1,0 +1,23 @@
+{
+  "name": "yam",
+  "version": "0.1.0",
+  "description": "Yet Another Music Player / Yandex.Music",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artemeff/yam.git"
+  },
+  "author": "Yuri Artemev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/artemeff/yam/issues"
+  },
+  "homepage": "https://github.com/artemeff/yam#readme",
+  "devDependencies": {
+    "electron-prebuilt": "^0.36.0",
+    "ipc"
+  }
+}
