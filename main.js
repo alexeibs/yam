@@ -10,12 +10,31 @@ const globalShortcut = electron.globalShortcut;
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+let willAppQuit = false;
 
 function createWindow() {
   mainWindow = new BrowserWindow({width: 1000, height: 700});
   mainWindow.loadURL('file://' + __dirname + '/index.html');
   
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
+
+  mainWindow.on('close', function(event) {
+    if (willAppQuit) {
+      // saveWindowState();
+    } else {
+      event.preventDefault();
+      switch(process.platform) {
+        case 'win32':
+        case 'linux':
+          mainWindow.minimize();
+          break;
+        case 'darwin':
+          mainWindow.hide();
+          break;
+        default:
+      } 
+    }
+  });
 
   mainWindow.on('closed', function() {
     // Dereference the window object, usually you would store windows
@@ -52,10 +71,11 @@ app.on('window-all-closed', function () {
 //   globalShortcut.unregisterAll();
 });
 
-app.on('activate', function () {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
-    createWindow();
-  }
+app.on('before-quit', function() {
+  willAppQuit = true;
+});
+
+// For OSX, show hidden mainWindow when clicking dock icon.
+app.on('activate', function(event) {
+  mainWindow.show();
 });
