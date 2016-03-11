@@ -16,4 +16,3 @@ build_win32:
 
 build_linux:
 	@$(DEFAULT_CMD) --platform=linux --icon=./app/icons/source_colored_png/128x128.png
-

@@ -3,7 +3,6 @@
 const electron = require('electron');
 
 const app = electron.app;
-// const ipc = electron.ipcMain;
 const BrowserWindow = electron.BrowserWindow;
 const globalShortcut = electron.globalShortcut;
 
@@ -12,7 +11,7 @@ const globalShortcut = electron.globalShortcut;
 let mainWindow;
 let willAppQuit = false;
 
-console.log(app.getPath('userData') + '/config.json');
+// console.log(app.getPath('userData') + '/config.json');
 
 const inCurrentDir = appends => 'file://' + __dirname + appends;
 
@@ -21,7 +20,7 @@ const createWindow = () => {
     icon: inCurrentDir('/icons/source_colored_png/256x256.png')});
   mainWindow.loadURL(inCurrentDir('/index.html'));
   
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   mainWindow.on('close', event => {
     if (willAppQuit) {
