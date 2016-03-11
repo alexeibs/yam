@@ -12,13 +12,18 @@ const globalShortcut = electron.globalShortcut;
 let mainWindow;
 let willAppQuit = false;
 
-function createWindow() {
-  mainWindow = new BrowserWindow({width: 1000, height: 700});
-  mainWindow.loadURL('file://' + __dirname + '/index.html');
-  
-  // mainWindow.webContents.openDevTools();
+console.log(app.getPath('userData') + '/config.json');
 
-  mainWindow.on('close', function(event) {
+const inCurrentDir = appends => 'file://' + __dirname + appends;
+
+const createWindow = () => {
+  mainWindow = new BrowserWindow({width: 1000, height: 700,
+    icon: inCurrentDir('/icons/source_colored_png/256x256.png')});
+  mainWindow.loadURL(inCurrentDir('/index.html'));
+  
+  mainWindow.webContents.openDevTools();
+
+  mainWindow.on('close', event => {
     if (willAppQuit) {
       // saveWindowState();
     } else {
@@ -36,33 +41,33 @@ function createWindow() {
     }
   });
 
-  mainWindow.on('closed', function() {
+  mainWindow.on('closed', () => {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
   });
 
-  globalShortcut.register('MediaNextTrack', function() {
+  globalShortcut.register('MediaNextTrack', () => {
     mainWindow.webContents.send('media-next-track');
   });
   
-  globalShortcut.register('MediaPreviousTrack', function() {
+  globalShortcut.register('MediaPreviousTrack', () => {
     mainWindow.webContents.send('media-prev-track');
   });
   
-  globalShortcut.register('MediaStop', function() {
+  globalShortcut.register('MediaStop', () => {
     mainWindow.webContents.send('media-stop');
   });
   
-  globalShortcut.register('MediaPlayPause', function() {
+  globalShortcut.register('MediaPlayPause', () => {
     mainWindow.webContents.send('media-play-pause');
   });
 }
 
 app.on('ready', createWindow);
 
-app.on('window-all-closed', function () {
+app.on('window-all-closed', () => {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   // if (process.platform !== 'darwin') {
@@ -71,11 +76,11 @@ app.on('window-all-closed', function () {
 //   globalShortcut.unregisterAll();
 });
 
-app.on('before-quit', function() {
+app.on('before-quit', () => {
   willAppQuit = true;
 });
 
 // For OSX, show hidden mainWindow when clicking dock icon.
-app.on('activate', function(event) {
+app.on('activate', event => {
   mainWindow.show();
 });
