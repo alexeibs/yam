@@ -16,7 +16,7 @@ let willAppQuit = false;
 const inCurrentDir = appends => 'file://' + __dirname + appends;
 
 const createWindow = () => {
-  mainWindow = new BrowserWindow({width: 1000, height: 700,
+  mainWindow = new BrowserWindow({width: 1080, height: 700,
     icon: inCurrentDir('/icons/source_colored_png/256x256.png')});
   mainWindow.loadURL(inCurrentDir('/index.html'));
   
