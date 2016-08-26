@@ -62,6 +62,26 @@ const createWindow = () => {
   globalShortcut.register('MediaPlayPause', () => {
     mainWindow.webContents.send('media-play-pause');
   });
+
+  globalShortcut.register('CommandOrControl+Alt+Right', () => {
+    mainWindow.webContents.send('media-next-track');
+  });
+  
+  globalShortcut.register('CommandOrControl+Alt+Left', () => {
+    mainWindow.webContents.send('media-prev-track');
+  });
+  
+  globalShortcut.register('CommandOrControl+Alt+Space', () => {
+    mainWindow.webContents.send('media-play-pause');
+  });
+
+  globalShortcut.register('CommandOrControl+Alt+Up', () => {
+    mainWindow.webContents.send('media-volume-increase');
+  });
+
+  globalShortcut.register('CommandOrControl+Alt+Down', () => {
+    mainWindow.webContents.send('media-volume-decrease');
+  });
 }
 
 app.on('ready', createWindow);

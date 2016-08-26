@@ -24,3 +24,11 @@ ipc.on('media-stop', () => {
 ipc.on('media-play-pause', () => {
   embed.executeJavaScript(`externalAPI.togglePause()`);
 });
+
+ipc.on('media-volume-increase', () => {
+  embed.executeJavaScript(`externalAPI.setVolume(Math.min((Math.floor(externalAPI.getVolume() * 10 + 0.5) + 1) / 10, 1))`);
+});
+
+ipc.on('media-volume-decrease', () => {
+  embed.executeJavaScript(`externalAPI.setVolume(Math.max((Math.floor(externalAPI.getVolume() * 10 + 0.5) - 1) / 10, 0))`);
+});
