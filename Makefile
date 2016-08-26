@@ -1,5 +1,5 @@
 PACKAGER=./app/node_modules/.bin/electron-packager
-DEFAULT_CMD=$(PACKAGER) ./app YAM --arch=all --version=0.36.11 --out=./build --asar=true --name=YAM
+DEFAULT_CMD=$(PACKAGER) ./app YAM --arch=all --version=1.3.4 --out=./build --asar=true --name=YAM
 
 .PHONY: run build
 
