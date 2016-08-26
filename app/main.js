@@ -22,24 +22,6 @@ const createWindow = () => {
   
   // mainWindow.webContents.openDevTools();
 
-  mainWindow.on('close', event => {
-    if (willAppQuit) {
-      // saveWindowState();
-    } else {
-      event.preventDefault();
-      switch(process.platform) {
-        case 'win32':
-        case 'linux':
-          mainWindow.minimize();
-          break;
-        case 'darwin':
-          mainWindow.hide();
-          break;
-        default:
-      } 
-    }
-  });
-
   mainWindow.on('closed', () => {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
